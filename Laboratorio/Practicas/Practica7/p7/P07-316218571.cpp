@@ -227,16 +227,16 @@ int main()
 
 	unsigned int spotLightCount = 0;
 	
-	/*
+
 	//linterna
-	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,  //color
+	spotLights[3] = SpotLight(1.0f, 1.0f, 1.0f,  //color
 		0.0f, 2.0f,//componente difusa
 		0.0f, 0.0f, 0.0f,
 		0.0f, -1.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		30.0f);  //angulo
 	spotLightCount++;
-	*/
+	
 
 	//luz de helicoptero
 	spotLights[1] = SpotLight(0.0f, 0.8f, 1.0f,
@@ -307,20 +307,29 @@ int main()
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
 		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 
-		/*
+		
 		// luz ligada a la camara de tipo flash
 		glm::vec3 lowerLight = camera.getCameraPosition();
 		lowerLight.y -= 0.3f;
-		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
-		*/
+		spotLights[3].SetFlash(lowerLight, camera.getCameraDirection());
+		
 
 		// luz ligada al helicoptero de tipo flash
 		glm::vec3 heliLight(mainWindow.getHelicopter_x(), mainWindow.getHelicopter_y(), mainWindow.getHelicopter_z());
 		spotLights[1].SetFlash(heliLight, glm::vec3(0.0f, -1.0f, 0.0f));
 
-		// luz ligada al carro de tipo flash
-		glm::vec3 autoLight(mainWindow.getCarro_x(), 0.5f, mainWindow.getCarro_z());
-		spotLights[2].SetFlash(autoLight, glm::vec3(1.0f, 0.0f, 0.0f));
+
+		if (mainWindow.getCarMovement() == 1 || mainWindow.getCarMovement() == 0) {
+			// luz ligada al carro de tipo flash
+			glm::vec3 autoLight(mainWindow.getCarro_x(), 0.5f, mainWindow.getCarro_z());
+			spotLights[2].SetFlash(autoLight, glm::vec3(1.0f, 0.0f, 0.0f));
+		}
+
+		else if(mainWindow.getCarMovement() == -1) {
+			// luz ligada al carro de tipo flash
+			glm::vec3 autoLight(mainWindow.getCarro_x() - 0.5f, 0.5f, mainWindow.getCarro_z());
+			spotLights[2].SetFlash(autoLight, glm::vec3(-1.0f, 0.0f, 0.0f));
+		}
 
 
 

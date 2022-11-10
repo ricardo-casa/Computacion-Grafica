@@ -24,6 +24,7 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 
 	move_cofre_y = 0.0f;
 
+	car_movement = 0;
 
 
 
@@ -190,9 +191,18 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 											  
 										  
 	// x + 2 + UP							  
-	if (theWindow->is_x_down && theWindow->is_2_down && theWindow->is_UP_down) theWindow->move_carro_x += 10.0;
+	if (theWindow->is_x_down && theWindow->is_2_down && theWindow->is_UP_down) {
+		theWindow->move_carro_x += 10.0;
+		theWindow->car_movement = 1;
+
+	}
 	// x + 2 + DOWN 	  					  
-	if (theWindow->is_x_down && theWindow->is_2_down && theWindow->is_DOWN_down) theWindow->move_carro_x -= 10.0;
+	if (theWindow->is_x_down && theWindow->is_2_down && theWindow->is_DOWN_down) {
+		theWindow->move_carro_x -= 10.0;
+		theWindow->car_movement = -1;
+	}
+	
+	
 	printf("-----------------------------------------------\n");
 	printf("%d %d %d\n", theWindow->is_z_down, theWindow->is_1_down, theWindow->is_UP_down);
 	printf("%d", theWindow->is_c_down && theWindow->is_1_down && theWindow->is_UP_down);

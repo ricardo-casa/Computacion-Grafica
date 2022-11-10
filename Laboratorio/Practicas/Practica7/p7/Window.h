@@ -23,6 +23,8 @@ public:
 	GLfloat getCarro_z() { return move_carro_z; }
 	GLfloat getCofre2() { return move_cofre_y; }
 
+	int getCarMovement() { return car_movement; }
+
 
 	bool getShouldClose() {
 		return  glfwWindowShouldClose(mainWindow);
@@ -72,6 +74,11 @@ private:
 	
 	bool is_c_down = false;
 
+
+	//carro adelante atras
+	//1 adelante
+	//-1 atras
+	int car_movement;
 
 
 	bool mouseFirstMoved;
